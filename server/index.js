@@ -4,6 +4,10 @@ const app = express();
 const cors = require("cors");
 app.use(cors());
 
+// Add the cookie-parser middleware
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 //basically parse incoming Request Object as a JSON Object
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -14,6 +18,9 @@ connect_database();
 
 const productRoutes = require("./routes/productRoutes");
 app.use("/api/v1",productRoutes);
+
+const userRoutes = require("./routes/userRoutes");
+app.use("/api/v1",userRoutes);
 
 app.get("/",(req,res)=>{
     res.send("Welcome on E-commerce App.....");
